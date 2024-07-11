@@ -10,6 +10,7 @@ import java.util.UUID;
 public class ItemsService {
     private ItemsManager itemsManager = new ItemsManager();
 
+
     public Items saveItem(Items item) {
         item.setUuid(UUID.randomUUID().toString());
         itemsManager.saveItem(item);
