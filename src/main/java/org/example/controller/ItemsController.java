@@ -53,6 +53,25 @@ public class ItemsController {
         }
     }
 
+    @GET
+    @Path("/get/{uuid}")
+    @Produces("application/json")
+    public Response getItem(@PathParam("uuid") String uuid) {
+        try {
+            Items item = itemsService.getItem(uuid);
+            if (item == null) {
+                return Response.status(Response.Status.NOT_FOUND).entity(ItemsMessages.NOT_FOUND).build();
+            }
+            String json = mapper.writeValueAsString(item);
+            return Response.ok(json, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(ItemsMessages.CONVERTING_ERROR).build();
+        }
+    }
+
+
     @PUT
     @Path("/update")
     @Consumes("application/json")
@@ -60,8 +79,8 @@ public class ItemsController {
     public Response updateItem(String json){
         try {
             Items item = mapper.readValue(json, Items.class);
-            itemsService.updateItem(item);
-            return Response.ok().build();
+            Items updatedItem = itemsService.updateItem(item);
+            return Response.ok(mapper.writeValueAsString(updatedItem)).build();
         } catch (IOException e) {
             e.printStackTrace();
             return Response.status(Response.Status.BAD_REQUEST).entity(ItemsMessages.NOT_VALID_PARAMS).build();
@@ -79,7 +98,7 @@ public class ItemsController {
 
         catch (Exception e) {
             e.printStackTrace();
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(ItemsMessages.CONVERTING_ERROR).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(ItemsMessages.NOT_FOUND).build();
         }
     }
 }

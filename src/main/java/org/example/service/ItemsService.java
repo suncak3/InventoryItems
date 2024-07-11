@@ -25,9 +25,9 @@ public class ItemsService {
         return itemsManager.getItems();
     }
 
-    public void updateItem(Items item) {
+    public Items updateItem(Items item) {
         itemsManager.updateItem(item);
-        //return getItem(item.getUuid());
+        return getItem(item.getUuid());
     }
 
     public void deleteItem(String uuid) {
