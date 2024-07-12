@@ -40,6 +40,9 @@ You can use Postman or any other API client to test the endpoints.
 - **GET http://localhost:8080/api/items/getAll**: Retrieve all items.
 
 - **GET http://localhost:8080/api/items/get/{uuid}**: Retrieve a single item by UUID.
+  - Just write the following URL: 
+http://localhost:8080/api/items/get/your_uuid
+  -uui should be written without any quotes and parentheses. As usually choose the GET endpoint and send it without json.
 
 - **PUT http://localhost:8080/api/items/update**: Update an existing item.
   - Request Body (JSON):
@@ -52,4 +55,5 @@ You can use Postman or any other API client to test the endpoints.
     ```
 
 - **DELETE /api/items/delete/{uuid}**: Delete an item by UUID.
+  - Just follow the steps as in the GET endpoint, but change the endpoint to the DELETE.
 
